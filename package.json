@@ -1,5 +1,7 @@
 {
   "name": "comic_review_app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery-ujs": "^1.2.2"
+  }
 }
