@@ -1,0 +1,31 @@
+<%= form_for(@comic) do |f| %>
+  <div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+  </div>
+
+  <div class="field">
+  <%= f.label :artist %>
+  <%= f.text_field :artist %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+  <%= f.label :genre %>
+  <%= f.text_field :genre %>
+  </div>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <%= f.submit yield(:button_text) %>
+
+<% end %>

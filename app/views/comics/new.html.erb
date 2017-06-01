@@ -1,0 +1,6 @@
+<% provide(:button_text,'Add Comic') %>
+<%if user_signed_in? %>
+  <%= render 'form' %>
+<% else %>
+  <p> Please sign in, champ! </p>
+<% end %>
