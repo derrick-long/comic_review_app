@@ -55,3 +55,13 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+RSpec.configure do |config|
+  config.include Warden::Test::Helpers
+end
+
+RSpec.configure do |config|
+  config.after :each do
+    Warden.test_reset!
+  end
+end

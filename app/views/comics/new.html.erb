@@ -1,4 +1,11 @@
 <% provide(:button_text,'Add Comic') %>
+<% if @comic.errors.any? %>
+  <h2> Please Correct The Following: </h2>
+  <% @comic.errors.full_messages.each do |message| %>
+    <li> <%= message %> </li>
+  <% end %>
+<% end %>
+
 <%if user_signed_in? %>
   <%= render 'form' %>
 <% else %>

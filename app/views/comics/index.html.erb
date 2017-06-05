@@ -1,10 +1,12 @@
-<% if user_signed_in? %>
-  <p> yo that helper worked </p>
-  <% @comics.each do |comic| %>
-    <li>  <%= link_to "#{comic.title}", comic_path(comic) %> |
-      <%= button_to "delete", comic, :method=>:delete, :class=>:destroy %>
-    </li>
 
-  <% end %>
-
+<% @comics.each do |comic| %>
+  <li>  <%= link_to "#{comic.title}", comic_path(comic) %> |
+    <% if user_signed_in? %>
+    <%= button_to "delete", comic, :method=>:delete, :class=>:destroy %>
+    <%= link_to "Delete",
+                  comic,
+                  method: :delete,
+                  data: { confirm: "You Sure?" } %>
+    <% end %>
+  </li>
 <% end %>

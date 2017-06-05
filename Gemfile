@@ -15,6 +15,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'warden'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy', require: false

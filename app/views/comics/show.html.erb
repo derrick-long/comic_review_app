@@ -3,4 +3,15 @@
   <li><%= @comic.artist %></li>
   <li><%= @comic.author %></li>
   <li><%= @comic.description %></li>
-</ul> 
+</ul>
+<% if user_signed_in? %>
+  <%= render 'reviews/new' %>
+<% end %>
+
+<h2> Reviews </h2>
+<ol>
+  <% @reviews.each do |review| %>
+  <li>  rating: <%= review.rating %> | <%= review.content %>
+      by <%= review.user.first_name %> <%= review.user.last_name %>
+  </li>
+  <% end %>

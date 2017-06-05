@@ -1,7 +1,7 @@
 class ComicsController < ApplicationController
 
   def index
-    @comics = Comic.all #make links to show page of all comics
+    @comics = Comic.all
   end
 
   def new
@@ -20,6 +20,8 @@ class ComicsController < ApplicationController
 
   def show
     @comic = Comic.find(params[:id])
+    @reviews = @comic.reviews.order('created_at DESC').all
+    @review = Review.new
   end
 
   def edit

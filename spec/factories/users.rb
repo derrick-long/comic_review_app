@@ -5,5 +5,6 @@ FactoryGirl.define do
     last_name "Person"
     password "password"
     password_confirmation "password"
+    sequence(:id)
   end
 end
