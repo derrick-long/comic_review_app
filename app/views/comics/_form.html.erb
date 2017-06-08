@@ -20,8 +20,13 @@
   </div>
 
   <div class="field">
-  <%= f.label :genre %>
-  <%= f.text_field :genre %>
+    <%= f.label :genre %>
+    <%= f.select(:genre_id) do %>
+      <% Genre.all.each do |genre| %>
+    <%= content_tag(:option, genre[:genre_name], value: genre[:id]) %>
+      <% end %>
+    <% end %>
+
   </div>
 
   <%= f.hidden_field :user_id, :value => current_user.id %>

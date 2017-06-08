@@ -9,8 +9,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema.define(version: 20170601163837) do
+#add the thing to seed the db  here jeez
+ActiveRecord::Schema.define(version: 20170606223309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,15 @@ ActiveRecord::Schema.define(version: 20170601163837) do
     t.string   "artist",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "genre"
     t.text     "description"
     t.integer  "user_id",     null: false
+    t.integer  "genre_id"
+    t.index ["genre_id"], name: "index_comics_on_genre_id", using: :btree
     t.index ["user_id"], name: "index_comics_on_user_id", using: :btree
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "genre_name"
   end
 
   create_table "reviews", force: :cascade do |t|

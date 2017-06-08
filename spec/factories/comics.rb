@@ -4,5 +4,6 @@ FactoryGirl.define do
     author "The Dude Man"
     artist "Another Guy"
     user_id 1
+    genre_id 1
   end
 end

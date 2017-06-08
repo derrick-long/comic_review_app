@@ -3,5 +3,5 @@
 GENRES = ["Fantasy", "Science Fiction", "Superhero", "Horror", "Reality Based", "Comedy", "Noir", "Foregin"]
 
 GENRES.each do |genre|
-  GENRE.create(genre: genre)
-end 
+  Genre.find_or_create_by(genre_name: genre)
+end

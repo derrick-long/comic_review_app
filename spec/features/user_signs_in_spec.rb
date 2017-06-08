@@ -42,9 +42,6 @@ feature 'user signs in' do
 
     expect(page).to have_content('Sign Out')
     expect(page).to_not have_content('Sign In')
-
-    visit new_user_session_path
-    save_and_open_page
   end
 
 

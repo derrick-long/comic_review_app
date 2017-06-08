@@ -1,4 +1,5 @@
 class ComicsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @comics = Comic.all
@@ -48,7 +49,7 @@ class ComicsController < ApplicationController
   private
 
   def comic_params
-    params.require(:comic).permit(:user_id, :author, :artist, :description, :genre, :title)
+    params.require(:comic).permit(:user_id, :author, :artist, :description, :genre_id, :title)
   end
 
 end

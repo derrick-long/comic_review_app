@@ -1,13 +1,15 @@
 <h1> <%= @comic.title %> </h1>
 <ul>
-  <li><%= @comic.artist %></li>
-  <li><%= @comic.author %></li>
-  <li><%= @comic.description %></li>
+  <li>Genre:  <%= @comic.genre.genre_name %> </li>
+  <li>Artist: <%= @comic.artist %></li>
+  <li>Author: <%= @comic.author %></li>
+  <li>Description: <%= @comic.description %></li>
 </ul>
 <% if user_signed_in? %>
   <%= render 'reviews/new' %>
 <% end %>
 
+<% unless @reviews.nil? %>
 <h2> Reviews </h2>
 <ol>
   <% @reviews.each do |review| %>
@@ -15,3 +17,4 @@
       by <%= review.user.first_name %> <%= review.user.last_name %>
   </li>
   <% end %>
+<% end %>
