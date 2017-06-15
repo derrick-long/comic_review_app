@@ -1,0 +1,11 @@
+<% unless @reviews.nil? %>
+  <h2> Reviews </h2>
+  <ol>
+    <% @reviews.each do |review| %>
+    <li>  rating: <%= review.rating %> | <%= review.content %>
+        by <%= review.user.first_name %> <%= review.user.last_name %>
+        <%= link_to 'Edit Review', 'comics/1/reviews/1/edit' %>
+    </li>
+
+    <% end %>
+<% end %>
