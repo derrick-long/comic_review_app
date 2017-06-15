@@ -5,16 +5,30 @@
   <li>Author: <%= @comic.author %></li>
   <li>Description: <%= @comic.description %></li>
 </ul>
+
+<% if user_signed_in? && current_user.id == @comic.user_id %>
+    <%= link_to 'Edit Comic', edit_comic_path %>
+<% end %>
+
+
+
 <% if user_signed_in? %>
-  <%= render 'reviews/new' %>
+  <% provide(:button_text, "Add Review") %>
+  <% provide(:title, "Add Your Review Below!") %>
+  <%= render 'reviews/form' %>
+<% else %>
+  <p> Please sign in to add a review </p>
 <% end %>
 
 <% unless @reviews.nil? %>
-<h2> Reviews </h2>
-<ol>
-  <% @reviews.each do |review| %>
-  <li>  rating: <%= review.rating %> | <%= review.content %>
-      by <%= review.user.first_name %> <%= review.user.last_name %>
-  </li>
-  <% end %>
+  <h2> Reviews </h2>
+  <ol>
+    <% @reviews.each do |review| %>
+    <li>  rating: <%= review.rating %> | <%= review.content %>
+        by <%= review.user.first_name %> <%= review.user.last_name %>
+        <% if user_signed_in? && current_user.id == review.user_id %>
+          <%= link_to 'Edit Review', edit_comic_review_path(@comic,review) %>
+          <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
+        <% end %>
+    <% end %>
 <% end %>
