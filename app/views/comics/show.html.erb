@@ -6,8 +6,11 @@
   <li>Description: <%= @comic.description %></li>
 </ul>
 
-<% if user_signed_in? && current_user.id == @comic.user_id %>
-    <%= link_to 'Edit Comic', edit_comic_path %>
+
+<% if current_user.nil? %>
+  <p> Please sign in to edit a comic  </p>
+<% elsif current_user.admin? || current_user.id == @comic.user_id %>
+    <%= link_to 'Edit Comic', edit_comic_path(@comic) %>
 <% end %>
 
 
@@ -20,4 +23,4 @@
   <p> Please sign in to add a review </p>
 <% end %>
 
-<%= render 'reviews/show' %> 
+<%= render 'reviews/show' %>

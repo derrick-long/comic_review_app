@@ -1,6 +1,6 @@
 class ComicsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
-
+  before_action :comic_permissions, only: [:update, :destroy]
   def index
     @comics = Comic.all
   end
@@ -48,8 +48,18 @@ class ComicsController < ApplicationController
 
   private
 
+  def comic_permissions
+    @comic = Comic.find(params[:id])
+    unless current_user.id == @comic.user_id || current_user.admin?
+      redirect_to(root_url)
+    end
+  end
+
+
   def comic_params
     params.require(:comic).permit(:user_id, :author, :artist, :description, :genre_id, :title)
   end
+
+
 
 end

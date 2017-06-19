@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
-  #make work off ajax, pretty duddy atm
+  before_action :review_permissions, only: [:update, :destroy]
 
   def create
     @review = Review.new(review_params)
@@ -46,4 +46,16 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:user_id, :comic_id, :content, :rating)
   end
+
+  def review_permissions
+    @review = Review.find(params[:id])
+    unless current_user.id == @review.user_id || current_user.admin?
+      redirect_to(root_url)
+    end
+  end
+
+  #so basically I need a before method that will make sure my current user is an admin
+  # OR that the current user is the owner of the object
+  # SO authenticate methods can stay but I need to mess with the "current_user"
+
 end
