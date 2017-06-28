@@ -4,13 +4,13 @@ class ComicsController < ApplicationController
   def index
     @comics = Comic.all
   end
-
+  #
   def new
     @comic = Comic.new
   end
 
   def create
-    @comic = Comic.new(comic_params)
+    @comic = current_user.comics.build(comic_params)
     if @comic.save
       flash[:notice] = "New comic added!"
       redirect_to root_url
@@ -20,9 +20,10 @@ class ComicsController < ApplicationController
   end
 
   def show
-    @comic = Comic.find(params[:id])
+    @comic = Comic.find(params[:id]) #like this to be comic_id
     @reviews = @comic.reviews.order('created_at DESC').all
     @review = Review.new
+    @vote = Vote.new
   end
 
   def edit

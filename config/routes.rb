@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   resources :comics do
     resources :reviews, only: [:new, :create, :edit, :update, :destroy]
   end
+
+  resources :votes, only: [:create]
+
 end

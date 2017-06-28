@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :review_permissions, only: [:update, :destroy]
 
   def create
-    @review = Review.new(review_params)
+    @review = current_user.reviews.build(review_params)
     @comic = Comic.find(params[:comic_id])
     if @review.save
       flash[:notice] = "Review Added!"
@@ -14,6 +14,8 @@ class ReviewsController < ApplicationController
   end
 
   def show
+    @comic = Comic.find(params[:comic_id])
+    @reviews = @comic.reviews.order('created_at DESC').all
   end
 
 
@@ -54,8 +56,5 @@ class ReviewsController < ApplicationController
     end
   end
 
-  #so basically I need a before method that will make sure my current user is an admin
-  # OR that the current user is the owner of the object
-  # SO authenticate methods can stay but I need to mess with the "current_user"
 
 end

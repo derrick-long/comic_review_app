@@ -15,8 +15,8 @@
   <%= f.text_field :content, id: "Review" %>
   </div>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-  <%= f.hidden_field :comic_id, :value => @comic.id %>
+
+  <%= f.hidden_field :comic_id, value: @comic.id %>
 
   <%= f.submit yield(:button_text) %>
 
