@@ -12,15 +12,13 @@
         <% elsif current_user.admin? || current_user.id == @comic.user_id %>
           <%= link_to 'Edit Review', edit_comic_review_path(@comic,review) %>
           <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
-          <%= form_for(@vote) do |f| %>
-            <%= f.hidden_field :user_id, :value => current_user.id %>
-            <%= f.hidden_field :review_id, :value => review.id %>
-            <%= label_tag(:value, "I reccomend this review") %>
-            <%= check_box_tag("vote[value]", 1) %>
-            <%= label_tag(:value, "I do not reccomend this review") %>
-            <%= check_box_tag("vote[value]", -1) %>
-            <%= f.submit("Vote") %>
-          <% end %>
+          <div id="voting-buttons">
+           <%= button_to "+", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: 1 } }), method: :post, id: "upvote-#{review.id}", class: "upvote" %>
+
+            <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote" %>
+          </div>
+
+
 
 
         <% end %>

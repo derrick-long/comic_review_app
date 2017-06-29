@@ -7,20 +7,21 @@ class VotesController < ApplicationController
     @review = Review.find(vote_params[:review_id])
     @comic = @review.comic
     @vote = Vote.find_by(user_id: current_user.id, review_id: @review.id)
-    #give another pass for refactor
+    user_input = vote_params[:value].to_i
+
     if @vote
       if  @vote.value == 0
-          @vote.value = vote_params[:value]
+          @vote.value = user_input
           @vote.save
           flash[:notice] = "Vote updated!"
           redirect_to @comic
-      elsif  @vote.value == vote_params[:value].to_i
+      elsif  @vote.value == user_input
           flash[:notice] = "You can only vote once!"
           redirect_to @comic
       else
           @vote.value = 0
           @vote.save
-          flash[:notice] = "Your vote has been updated!"
+          flash[:notice] = "Vote  updated!"
           redirect_to @comic
       end
     else
