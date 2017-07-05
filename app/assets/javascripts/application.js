@@ -14,10 +14,17 @@
 //= jquery-ujs
 //= require_tree .
 
+// need to add function that updates info sent by api controller to my view
+// should automatically default to zero if no votes exist 
+
 $(function() {
 
   function ajaxPost(review_id, value) {
     var request = $.ajax({
+      headers: {
+  'X-Transaction': 'POST Example',
+  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  },
       method: "POST",
       url: "/api/v1/votes",
       data: {
@@ -46,3 +53,4 @@ $(function() {
     ajaxPost(reviewID, -1);
 
   });
+});

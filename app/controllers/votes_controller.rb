@@ -4,6 +4,7 @@ class VotesController < ApplicationController
 
 
   def create
+
     @review = Review.find(vote_params[:review_id])
     @comic = @review.comic
     @vote = Vote.find_by(user_id: current_user.id, review_id: @review.id)

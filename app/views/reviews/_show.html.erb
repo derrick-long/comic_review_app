@@ -2,10 +2,18 @@
   <h2> Reviews </h2>
   <ol>
     <% @reviews.each do |review| %>
-
     <li>  rating: <%= review.rating %> | <%= review.content %>
         by <%= review.user.first_name %> <%= review.user.last_name %>
-          <p> Vote Score: <%= review.vote_count %> </p>
+
+          <div class="vote-total"> User Rating:
+            <div id="vote-total-<%=review.id%>">
+              <% if review.vote_count %>
+              <%= review.vote_count %>
+              <% else %>
+                0
+                <% end %>
+           </div>
+         </div>
 
         <% if current_user.nil? %>
             <p> Please sign in to edit a review or add a vote</p>
@@ -14,8 +22,7 @@
           <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
           <div id="voting-buttons">
            <%= button_to "+", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: 1 } }), method: :post, id: "upvote-#{review.id}", class: "upvote" %>
-
-            <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote" %>
+           <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote" %>
           </div>
 
 
