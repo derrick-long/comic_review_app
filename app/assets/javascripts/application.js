@@ -15,15 +15,14 @@
 //= require_tree .
 
 // need to add function that updates info sent by api controller to my view
-// should automatically default to zero if no votes exist 
+// should automatically default to zero if no votes exist
 
 $(function() {
 
   function ajaxPost(review_id, value) {
     var request = $.ajax({
       headers: {
-  'X-Transaction': 'POST Example',
-  'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
   },
       method: "POST",
       url: "/api/v1/votes",
@@ -33,7 +32,7 @@ $(function() {
     });
 
     request.done(function(data) {
-      $("#vote-total-" + data.reviewID).text(data.voteTotal);
+      $("#vote-count-" + data.reviewID).text(data.voteTotal);
       $("#flash-container").text(data.voteMessage);
     });
   }
