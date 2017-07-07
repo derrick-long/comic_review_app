@@ -69,6 +69,16 @@ Rails.application.configure do
 
   #CHANGE WHEN DEPLOYED
   config.action_mailer.default_url_options = { host: 'https://infinite-peak-69788.herokuapp.com/' }
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    domain:               'heroku.com',
+    user_name:            ENV['SENDGRID_USERNAME'],
+    password:             ENV['SENDGRID_PASSWORD'],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
 
