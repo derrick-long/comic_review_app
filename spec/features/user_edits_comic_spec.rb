@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 feature 'editing a comic' do
+  before(:each) do
+    load "#{Rails.root}/db/seeds.rb"
+  end
+
 
   scenario 'user edits comic successfully' do
     user = FactoryGirl.create(:user)
@@ -16,8 +20,8 @@ feature 'editing a comic' do
 
   scenario "user tries to edit a comic that isn't theirs" do
     user = FactoryGirl.create(:user)
-    genre = FactoryGirl.create(:genre)
     comic = FactoryGirl.create(:comic, user_id: 10000)
+    genre = FactoryGirl.create(:genre)
     login_as(user,:scope => :user)
     visit comic_path(comic)
     expect(page).to_not have_content('Edit Comic')

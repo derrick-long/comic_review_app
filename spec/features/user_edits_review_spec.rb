@@ -6,8 +6,8 @@ feature 'update a review' do
 
     scenario 'user succesfully updates a review' do
       user = FactoryGirl.create(:user)
-      comic = FactoryGirl.create(:comic)
       genre = FactoryGirl.create(:genre)
+      comic = FactoryGirl.create(:comic)
       review = FactoryGirl.create(:review, user_id: user.id, comic_id: comic.id)
       login_as(user,:scope => :user)
       visit comic_path(comic)
@@ -20,8 +20,8 @@ feature 'update a review' do
 
     scenario 'user unsuccesfully updates a review' do
       user = FactoryGirl.create(:user)
-      comic = FactoryGirl.create(:comic)
       genre = FactoryGirl.create(:genre)
+      comic = FactoryGirl.create(:comic)
       review = FactoryGirl.create(:review, user_id: user.id, comic_id: comic.id)
       login_as(user,:scope => :user)
       visit comic_path(comic)
