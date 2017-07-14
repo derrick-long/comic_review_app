@@ -8,7 +8,7 @@
 
 
 <% if current_user.nil? %>
-  <p> Please sign in to edit a comic or vote. </p>
+  <p> Please <%= link_to "sign in", new_user_session_path %> to edit a comic, add a review, or vote. </p>
 <% elsif current_user.admin? || current_user.id == @comic.user_id %>
     <%= link_to 'Edit Comic', edit_comic_path(@comic) %>
 <% end %>
@@ -19,8 +19,7 @@
   <% provide(:button_text, "Add Review") %>
   <% provide(:title, "Add Your Review Below!") %>
   <%= render 'reviews/form' %>
-<% else %>
-  <p> Please sign in to add a review </p>
+
 <% end %>
 
 <%= render 'reviews/show' %>

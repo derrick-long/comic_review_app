@@ -1,8 +1,10 @@
 <h1> Comics </h1>
 <% @comics.each do |comic| %>
   <li>  <%= link_to "#{comic.title}", comic_path(comic) %> |
-        <% unless current_user.nil? || current_user.id != comic.user_id %>
+        <% unless current_user.nil? %>
+          <% if current_user.id == comic.user_id || current_user.admin? %>
           <%= button_to "delete", comic, :method=>:delete, :class=>:destroy %>
+          <% end %>
         <% end %>
   </li>
 <% end %>

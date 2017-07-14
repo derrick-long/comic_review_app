@@ -5,29 +5,32 @@
     <li>  rating: <%= review.rating %> | <%= review.content %>
         by <%= review.user.first_name %> <%= review.user.last_name %>
 
-          <div class="vote-count"> User Rating:
-            <div id="vote-count-<%=review.id%>">
-              <% if review.vote_count %>
+          <div class="vote-count"> <div id="vote-count-<%=review.id%>"> User Rating:
+            <% if review.vote_count %>
               <%= review.vote_count %>
-              <% else %>
-                0
-                <% end %>
-           </div>
-         </div>
+            <% else %>
+              0
+            <% end %>
 
-        <% if current_user.nil? %>
-            <p> Please sign in to edit a review or add a vote</p>
-        <% elsif current_user.admin? || current_user.id == @comic.user_id %>
-          <%= link_to 'Edit Review', edit_comic_review_path(@comic,review) %>
-          <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
+          </div>
+          </div>
+
+
+          <% unless current_user.nil? %>
+            <% if current_user.id == review.user_id || current_user.admin? %>
+              <%= link_to 'Edit Review', edit_comic_review_path(@comic,review) %>
+              <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
+            <% end %>
+
           <div id="voting-buttons">
            <%= button_to "+", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: 1 } }), method: :post, id: "upvote-#{review.id}", class: "upvote" %>
            <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote" %>
           </div>
 
+          <% end %>
 
 
 
-        <% end %>
+
     <% end %>
 <% end %>

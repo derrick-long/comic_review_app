@@ -16,6 +16,7 @@ feature 'delete a review' do
   end
 
 
+
   scenario  "user attempts to delete a review that is not theirs" do
     user = FactoryGirl.create(:user)
     other_user = FactoryGirl.create(:user)
