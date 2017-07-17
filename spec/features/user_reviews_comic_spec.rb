@@ -5,10 +5,12 @@ feature 'user reviews a comic' do
     load "#{Rails.root}/db/seeds.rb"
   end
 
+  let!(:user){ FactoryGirl.create(:user) }
+
+
   scenario 'user successfully adds a review' do
-    user = FactoryGirl.create(:user)
-    comic = FactoryGirl.create(:comic, user_id: user.id)
     genre = FactoryGirl.create(:genre)
+    comic = FactoryGirl.create(:comic, user_id: user.id)
     login_as(user,:scope => :user)
     visit comic_path(comic)
     fill_in 'Rating', with: 5
@@ -17,12 +19,13 @@ feature 'user reviews a comic' do
 
     expect(page).to have_content('Review Added!')
     expect(page.current_url).to eq("http://www.example.com/comics/#{comic.id}")
+
+    DatabaseCleaner.clean
   end
 
   scenario 'user unsuccessfully adds a review' do
-    user = FactoryGirl.create(:user)
-    comic = FactoryGirl.create(:comic, user_id: user.id)
     genre = FactoryGirl.create(:genre)
+    comic = FactoryGirl.create(:comic, user_id: user.id)
     login_as(user,:scope => :user)
     visit comic_path(comic)
     fill_in 'Rating', with: "Tacos"
@@ -30,13 +33,17 @@ feature 'user reviews a comic' do
     click_button 'Add Review'
     expect(page).to have_content('Rating is not a number')
     expect(page).to have_content("Content can't be blank")
+
+    DatabaseCleaner.clean
   end
 
   scenario 'unsigned in user tries to add a review' do
-    comic = FactoryGirl.create(:comic)
     genre = FactoryGirl.create(:genre)
+    comic = FactoryGirl.create(:comic)
     visit comic_path(comic)
-    expect(page).to have_content('Please sign in to add a review')
+    expect(page).to have_content('add a review')
+
+    DatabaseCleaner.clean
   end
 
 end

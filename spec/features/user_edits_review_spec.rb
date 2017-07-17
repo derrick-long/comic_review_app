@@ -4,12 +4,13 @@ feature 'update a review' do
     load "#{Rails.root}/db/seeds.rb"
   end
 
+      let!(:user){ FactoryGirl.create(:user) }
+      let!(:comic){ FactoryGirl.create(:comic) }
+
     scenario 'user succesfully updates a review' do
-      user = FactoryGirl.create(:user)
       genre = FactoryGirl.create(:genre)
-      comic = FactoryGirl.create(:comic)
       review = FactoryGirl.create(:review, user_id: user.id, comic_id: comic.id)
-      login_as(user,:scope => :user)
+      login_as(user)
       visit comic_path(comic)
       click_link 'Edit Review'
       fill_in 'Rating', with: 5
@@ -19,11 +20,9 @@ feature 'update a review' do
     end
 
     scenario 'user unsuccesfully updates a review' do
-      user = FactoryGirl.create(:user)
       genre = FactoryGirl.create(:genre)
-      comic = FactoryGirl.create(:comic)
       review = FactoryGirl.create(:review, user_id: user.id, comic_id: comic.id)
-      login_as(user,:scope => :user)
+      login_as(user)
       visit comic_path(comic)
       click_link 'Edit Review'
       fill_in 'Rating', with: "eggs"

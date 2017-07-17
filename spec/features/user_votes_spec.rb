@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "user votes on review" , %Q(
-  As an authenticated user
-  I want to vote on reviews
-  So that everyone will know which reviews are the best
-) do
+RSpec.feature "user votes on review" do
 
 
   let!(:user) { FactoryGirl.create(:user) }
@@ -38,7 +34,7 @@ RSpec.feature "user votes on review" , %Q(
     DatabaseCleaner.clean
   end
 
-  scenario 'authenticated user changes their vote' do
+  scenario 'authenticated user changes equalizes their vote' do
     visit '/'
     user.confirm
     login_as(user)

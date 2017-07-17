@@ -2,10 +2,11 @@ require 'rails_helper'
 
 feature 'delete a comic' do
 
+  let!(:user){ FactoryGirl.create(:user) }
+  let!(:genre){ FactoryGirl.create(:genre) }
+
   scenario 'user successfully deletes a comic they created' do
-    user = FactoryGirl.create(:user)
     comic = FactoryGirl.create(:comic, user_id: user.id)
-    genre = FactoryGirl.create(:genre)
     user.confirm
     login_as(user)
     visit root_path
@@ -15,10 +16,8 @@ feature 'delete a comic' do
   end
 
   scenario 'user attempts to delete a comic they did not create and are not an admin' do
-    user = FactoryGirl.create(:user)
     user_1 = FactoryGirl.create(:user)
     comic = FactoryGirl.create(:comic, user_id: user_1.id)
-    genre = FactoryGirl.create(:genre)
     user.confirm
     login_as(user)
     visit root_path
@@ -27,11 +26,10 @@ feature 'delete a comic' do
   end
 
   scenario 'admin successfully deletes a comic' do
-    user = FactoryGirl.create(:user, admin: true)
+    user_2 = FactoryGirl.create(:user, admin: true)
     comic = FactoryGirl.create(:comic)
-    genre = FactoryGirl.create(:genre)
-    user.confirm
-    login_as(user)
+    user_2.confirm
+    login_as(user_2)
     visit root_path
     click_link 'Comics'
     click_button 'delete'

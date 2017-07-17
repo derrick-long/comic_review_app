@@ -2,8 +2,9 @@ require 'rails_helper'
 
   feature 'user sign up' do
 
+    let!(:user) { FactoryGirl.create(:user) }
+
     scenario 'user signs up with valid information' do
-      user = FactoryGirl.create(:user)
       visit root_path
       click_link 'Sign Up'
       fill_in 'First name', with: user.first_name
