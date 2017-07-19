@@ -2,31 +2,32 @@
   <h2> Reviews </h2>
   <ol>
     <% @reviews.each do |review| %>
-    <li>  rating: <%= review.rating %> | <%= review.content %>
+    <div class="container">  rating: <%= review.rating %> | <%= review.content %>
         by <%= review.user.first_name %> <%= review.user.last_name %>
 
-          <div class="vote-count"> <div id="vote-count-<%=review.id%>"> User Rating:
+          <div class="vote-count">
+            <div id="vote-count-<%=review.id%>">
+              User Rating:
             <% if review.vote_count %>
               <%= review.vote_count %>
             <% else %>
               0
             <% end %>
-
-          </div>
+            </div>
           </div>
 
 
           <% unless current_user.nil? %>
             <% if current_user.id == review.user_id || current_user.admin? %>
               <%= link_to 'Edit Review', edit_comic_review_path(@comic,review) %>
-              <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy %>
+              <%= button_to "delete",[@comic,review], :method=>:delete, :class=>:destroy, class:"btn btn-danger" %>
             <% end %>
 
           <div id="voting-buttons">
-           <%= button_to "+", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: 1 } }), method: :post, id: "upvote-#{review.id}", class: "upvote" %>
-           <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote" %>
+            <%= button_to "+", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: 1 } }), method: :post, id: "upvote-#{review.id}", class: "upvote", class:"btn btn-outline-success" %>
+           <%= button_to "-", votes_path(Vote.new, params: { vote: { user_id: current_user.id, review_id: review.id, value: -1 } }), method: :post, id: "downvote-#{review.id}", class: "downvote", class:"btn btn-outline-danger" %>
           </div>
-
+        </div>
           <% end %>
 
 

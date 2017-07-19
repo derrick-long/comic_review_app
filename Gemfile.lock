@@ -213,7 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap
+  bootstrap (~> 4.0.0.alpha3)
   capybara
   database_cleaner
   devise

@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= jquery-ujs
+//= require bootstrap
+
 //= require_tree .
 
 // need to add function that updates info sent by api controller to my view

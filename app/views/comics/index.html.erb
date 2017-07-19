@@ -3,7 +3,7 @@
   <li>  <%= link_to "#{comic.title}", comic_path(comic) %> |
         <% unless current_user.nil? %>
           <% if current_user.id == comic.user_id || current_user.admin? %>
-          <%= button_to "delete", comic, :method=>:delete, :class=>:destroy %>
+          <%= button_to "delete", comic, :method=>:delete, :class=>:destroy, class: "btn btn-danger" %>
           <% end %>
         <% end %>
   </li>

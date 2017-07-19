@@ -1,3 +1,4 @@
+<h1 class="page-header"> Welcome Administrator! </h1>
 <% @users.each do |user| %>
   <%= user.first_name %> | <%= user.last_name %>
   <%= button_to "delete", user, :method=>:delete, :class=>:destroy %>
