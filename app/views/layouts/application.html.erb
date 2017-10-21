@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ComicReviewApp</title>
     <%= csrf_meta_tags %>
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
 </head>
 <body>
-<div class="container">
-  <div class="top-bar">
-    <div class="navbar-nav">
-      <% if user_signed_in? %>
-      <%= link_to "Sign Out", destroy_user_session_path %>
-      <% end %>
-      <div id="flash-container">
-      <% flash.each do |key, value|  %>
-        <%= value %>
+  <div id="main-containter" class="container" >
+    <div class=-"row">
+    <div class="top-bar">
+      <div class="navbar-nav">
+        <% if user_signed_in? %>
+        <%= link_to "Sign Out", destroy_user_session_path %>
         <% end %>
+        <div id="flash-container">
+        <% flash.each do |key, value|  %>
+          <%= value %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div> 
-    <%= yield %>
-</div>
+      <%= yield %>
+  </div>
 </body>
 </html>
