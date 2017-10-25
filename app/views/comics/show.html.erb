@@ -2,14 +2,14 @@
   <h1> <%= @comic.title %> </h1>
 </div>
 
-<div class="main-content">
+<div id="comic-info">
   <ul>
     <li>Genre:  <%= @comic.genre.genre_name %> </li>
     <li>Artist: <%= @comic.artist %></li>
     <li>Author: <%= @comic.author %></li>
     <li>Description: <%= @comic.description %></li>
   </ul>
-
+</div>
 
   <% if current_user.nil? %>
     <p> Please <%= link_to "sign in", new_user_session_path %> to edit a comic, add a review, or vote. </p>
@@ -17,7 +17,9 @@
       <%= link_to 'Edit Comic', edit_comic_path(@comic) %>
   <% end %>
 
+<div id= "reviews">
 
+  <%= render 'reviews/show' %>
 
   <% if user_signed_in? %>
     <% provide(:button_text, "Confirm") %>
@@ -26,6 +28,5 @@
 
   <% end %>
 
-  <%= render 'reviews/show' %>
 
-</div> 
+</div>

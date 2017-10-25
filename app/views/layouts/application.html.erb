@@ -24,10 +24,17 @@
            <% end %>
 
            <%= link_to "Comics", comics_path, class: "nav-link" %>
+        </nav>
 
-      </nav>
-
-      <%= yield %>
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col-12">
+            <%= yield %>
+          </div>
+          <div class="col">
+          </div>
+        </div>
   </div>
 </body>
 </html>

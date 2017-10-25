@@ -4,18 +4,27 @@
   *= require tether
 */
 
+.container {
+  text-align: center;
+}
+
 .nav-link{
   display: inline-block;
 }
 
-.jumbotron {
-  text-align: center;
-}
 .flash-container {
-  padding-right: 2rem; 
+
+}
+
+#comic-info {
+  text-align: left;
+  display: inline-block;
 }
 
 
-
+#review {
+  text-align: left;
+  display: inline-block;
+}
 
 // find a way to display info not as a default UL looks terrible
