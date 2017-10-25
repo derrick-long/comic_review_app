@@ -1,17 +1,17 @@
-
+<!-- Maybe add as a dropdown?  -->
   <h2> <%= yield(:title) %> </h2>
 <% if @review.errors.any? %>
   <% @review.errors.full_messages.each do |error| %>
     <li> <%= error %> </li>
   <% end %>
 <% end %>
-<%= form_for [@comic,@review] do |f| %>
-  <div class="field">
+<%= form_for [@comic,@review], :html=> {:class => "row"} do |f| %>
+  <div class="col-4">
   <%= f.label :rating %>
   <%= f.text_field :rating %>
   </div>
 
-  <div class="field">
+  <div class="col-4">
   <%= f.label :review %>
   <%= f.text_field :content, id: "Review" %>
   </div>
@@ -19,6 +19,6 @@
 
   <%= f.hidden_field :comic_id, value: @comic.id %>
 
-  <%= f.submit yield(:button_text) %>
+  <%= f.submit yield(:button_text), class:"btn btn-primary" %>
 
 <% end %>
