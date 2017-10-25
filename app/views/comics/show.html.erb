@@ -1,25 +1,31 @@
-<h1> <%= @comic.title %> </h1>
-<ul>
-  <li>Genre:  <%= @comic.genre.genre_name %> </li>
-  <li>Artist: <%= @comic.artist %></li>
-  <li>Author: <%= @comic.author %></li>
-  <li>Description: <%= @comic.description %></li>
-</ul>
+<div class="jumbotron">
+  <h1> <%= @comic.title %> </h1>
+</div>
+
+<div class="main-content">
+  <ul>
+    <li>Genre:  <%= @comic.genre.genre_name %> </li>
+    <li>Artist: <%= @comic.artist %></li>
+    <li>Author: <%= @comic.author %></li>
+    <li>Description: <%= @comic.description %></li>
+  </ul>
 
 
-<% if current_user.nil? %>
-  <p> Please <%= link_to "sign in", new_user_session_path %> to edit a comic, add a review, or vote. </p>
-<% elsif current_user.admin? || current_user.id == @comic.user_id %>
-    <%= link_to 'Edit Comic', edit_comic_path(@comic) %>
-<% end %>
+  <% if current_user.nil? %>
+    <p> Please <%= link_to "sign in", new_user_session_path %> to edit a comic, add a review, or vote. </p>
+  <% elsif current_user.admin? || current_user.id == @comic.user_id %>
+      <%= link_to 'Edit Comic', edit_comic_path(@comic) %>
+  <% end %>
 
 
 
-<% if user_signed_in? %>
-  <% provide(:button_text, "Add Review") %>
-  <% provide(:title, "Add Your Review Below!") %>
-  <%= render 'reviews/form' %>
+  <% if user_signed_in? %>
+    <% provide(:button_text, "Confirm") %>
+    <% provide(:title, "Add Review") %>
+    <%= render 'reviews/form' %>
 
-<% end %>
+  <% end %>
 
   <%= render 'reviews/show' %>
+
+</div> 

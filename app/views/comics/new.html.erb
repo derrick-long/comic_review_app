@@ -1,13 +1,19 @@
-<% provide(:button_text,'Add Comic') %>
-<% if @comic.errors.any? %>
-  <h2> Please Correct The Following: </h2>
-  <% @comic.errors.full_messages.each do |message| %>
-    <li> <%= message %> </li>
-  <% end %>
-<% end %>
+<div class="jumbotron">
+  <h1> Add a New Comic</h1>
+</div>
 
-<%if user_signed_in? %>
-  <%= render 'form' %>
-<% else %>
-  <p> Please sign in, champ! </p>
-<% end %>
+<div class="form">
+  <% provide(:button_text,'Add Comic') %>
+  <% if @comic.errors.any? %>
+    <h2> Please Correct The Following: </h2>
+    <% @comic.errors.full_messages.each do |message| %>
+      <li> <%= message %> </li>
+    <% end %>
+  <% end %>
+
+  <%if user_signed_in? %>
+    <%= render 'form' %>
+  <% else %>
+    <p> Please sign in, champ! </p>
+  <% end %>
+</div> 
