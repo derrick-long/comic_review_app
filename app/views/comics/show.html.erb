@@ -22,8 +22,8 @@
   <%= render 'reviews/show' %>
 
   <% if user_signed_in? %>
-    <% provide(:button_text, "Confirm") %>
-    <% provide(:title, "Add Review") %>
+    <% provide(:button_text, "Add Review") %>
+    <% provide(:title, "New Review") %>
     <%= render 'reviews/form' %>
 
   <% end %>
