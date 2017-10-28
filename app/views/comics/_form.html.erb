@@ -12,15 +12,15 @@
 
     <%= f.label :description %>
     <%= f.text_field :description,  class: 'form-control' %>
-    <div class='form-control>'
+    <div id= 'comic-new'>
       <%= f.label :genre %>
       <%= f.select(:genre_id) do %>
         <% Genre.all.each do |genre| %>
       <%= content_tag(:option, genre[:genre_name], value: genre[:id]) %>
         <% end %>
       <% end %>
+            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     </div>
-      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 
 <% end %>
   </div>
